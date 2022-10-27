@@ -20,7 +20,7 @@ module.exports.getUserById = (req, res) => {
       if (err.name === 'CastError') {
         res.status(INCORRECT_DATA_ERROR).send({ message: 'Переданы некорректные данные' });
       } else if (err.message === 'NotFound') {
-        res.status(NO_DATA_ERROR).send({ message: `Пользователь по указанному _id не найден` });
+        res.status(NO_DATA_ERROR).send({ message: 'Пользователь по указанному _id не найден' });
       } else {
         res.status(DEFAULT_ERROR).send({ message: 'На сервере произошла ошибка' });
       }
@@ -45,14 +45,15 @@ module.exports.updateUser = (req, res) => {
   return User.findOneAndUpdate(
     req.user._id,
     { name, about },
-    { new: true, runValidators: true })
+    { new: true, runValidators: true },
+  )
     .orFail(() => new Error('NotFound'))
     .then((user) => res.send(user))
     .catch((err) => {
       if (err.name === 'ValidationError' || err.name === 'CastError') {
         res.status(INCORRECT_DATA_ERROR).send({ message: 'Переданы некорректные данные при обновлении профиля' });
       } else if (err.message === 'NotFound') {
-        res.status(NO_DATA_ERROR).send({ message: `Пользователь по указанному _id не найден` });
+        res.status(NO_DATA_ERROR).send({ message: 'Пользователь по указанному _id не найден' });
       } else {
         res.status(DEFAULT_ERROR).send({ message: 'На сервере произошла ошибка' });
       }
@@ -71,7 +72,7 @@ module.exports.updateAvatar = (req, res) => {
       if (err.name === 'ValidationError' || err.name === 'CastError') {
         res.status(INCORRECT_DATA_ERROR).send({ message: 'Переданы некорректные данные при обновлении аватара' });
       } else if (err.message === 'NotFound') {
-        res.status(NO_DATA_ERROR).send({ message: `Пользователь по указанному _id не найден` });
+        res.status(NO_DATA_ERROR).send({ message: 'Пользователь по указанному _id не найден' });
       } else {
         res.status(DEFAULT_ERROR).send({ message: 'На сервере произошла ошибка' });
       }

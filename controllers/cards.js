@@ -3,8 +3,8 @@ const { INCORRECT_DATA_ERROR, NO_DATA_ERROR, DEFAULT_ERROR } = require('../utils
 
 module.exports.getCards = (req, res) => {
   Card.find({})
-    .then((cards) => res.status(200).send(cards))
-    .catch(() => res.status(INTERNAL_SERVER_ERROR).send({ message: 'На сервере произошла ошибка' }));
+    .then((cards) => res.send(cards))
+    .catch(() => res.status(DEFAULT_ERROR).send({ message: 'На сервере произошла ошибка' }));
 };
 
 module.exports.createCard = (req, res) => {
