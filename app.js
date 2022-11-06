@@ -42,7 +42,7 @@ app.use('/users', require('./routes/users'));
 app.use('/cards', require('./routes/cards'));
 app.use(errors());
 
-app.use('/*', (req, res, next) => next(new NotFoundError('Запрашиваемый ресурс не найден')));
+app.use('*', (req, res, next) => next(new NotFoundError('Запрашиваемый ресурс не найден')));
 
 app.use(errorHandler);
 
