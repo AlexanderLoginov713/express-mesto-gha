@@ -25,8 +25,6 @@ const limiter = rateLimit({
 app.use(limiter);
 app.use(helmet());
 
-app.use(errorHandler);
-
 mongoose.connect('mongodb://localhost:27017/mestodb', {
   useNewUrlParser: true,
 });
@@ -43,6 +41,7 @@ app.use(auth);
 app.use('/users', require('./routes/users'));
 app.use('/cards', require('./routes/cards'));
 app.use(errors());
+
 app.use('/*', (req, res, next) => next(new NotFoundError('Запрашиваемый ресурс не найден')));
 
 app.use(errorHandler);
