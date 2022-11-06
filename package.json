@@ -14,7 +14,7 @@
     "url": "git+https://github.com/AlexanderLoginov713/express-mesto-gha.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Alexander Loginov",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/AlexanderLoginov713/express-mesto-gha/issues"
@@ -31,7 +31,6 @@
     "helmet": "^6.0.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.6.7",
-    "routes": "^2.1.0",
     "validator": "^13.7.0"
   },
   "devDependencies": {

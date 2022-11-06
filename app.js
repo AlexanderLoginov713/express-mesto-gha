@@ -6,14 +6,8 @@ const bodyparser = require('body-parser');
 const { errors } = require('celebrate');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
-const { createUser, login } = require('./controllers/users');
-const auth = require('./middlewares/auth');
-const {
-  checkingCreateUser,
-  checkingLogin,
-} = require('./middlewares/validations');
+const router = require('./routes');
 const errorHandler = require('./middlewares/errorHandler');
-const NotFoundError = require('./errors/NotFoundError');
 
 const { PORT = 3000 } = process.env;
 const app = express();
@@ -33,17 +27,8 @@ app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true }));
 
 app.use(cookieParser());
-
-app.post('/signup', checkingCreateUser, createUser);
-app.post('/signin', checkingLogin, login);
-
-app.use(auth);
-app.use('/users', require('./routes/users'));
-app.use('/cards', require('./routes/cards'));
+app.use('/', router);
 app.use(errors());
-
-app.use('*', (req, res, next) => next(new NotFoundError('Запрашиваемый ресурс не найден')));
-
 app.use(errorHandler);
 
 app.listen(PORT, () => {
