@@ -3,7 +3,7 @@ const validator = require('validator');
 const BadRequestError = require('../errors/BadRequestError');
 
 const checkingUrl = (url) => {
-  const validate = validator.isUrl(url);
+  const validate = validator.isURL(url);
   if (validate) {
     return url;
   }
